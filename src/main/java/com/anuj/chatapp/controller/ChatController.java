@@ -1,11 +1,13 @@
 package com.anuj.chatapp.controller;
 
 import com.anuj.chatapp.entities.Message;
+import com.anuj.chatapp.entities.Room;
 import com.anuj.chatapp.payload.MessageRequest;
 import com.anuj.chatapp.repositories.RoomRepository;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,7 +25,7 @@ public class ChatController {
     @MessageMapping("/sendMessage/{roomId}")
     @SendTo("/topic/room/{roomId}")
     public Message sendMessage(@DestinationVariable String roomId, @RequestBody MessageRequest request) {
-        Rooom rooom = roomRepository.findByRoomId(request.getRoomId());
+        Room rooom = roomRepository.findByRoomId(String.valueOf(request.getRoomId()));
 
         Message message = new Message();
         message.setContent(request.getContent());

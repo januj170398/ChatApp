@@ -16,7 +16,9 @@ import java.time.LocalDateTime;
 public class MessageRequest {
     private String content;
     private String sender;
-    private Long roomId;
+    private String roomId;
     private LocalDateTime messageTime;
 
+    public String getRoomId() { return roomId; }
+    public void setRoomId(String roomId) { this.roomId = roomId; }
 }
